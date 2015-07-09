@@ -20,7 +20,6 @@ angular.module('iffy_app', ['ionic'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
-
     .state('app', {
       url: '/app',
       abstract: true,
@@ -34,9 +33,10 @@ angular.module('iffy_app', ['ionic'])
           templateUrl: 'states/home.html'
         }
       }
-    })
+    });
+
 
   $urlRouterProvider.otherwise('/app/home');
 
-})
+});
 
