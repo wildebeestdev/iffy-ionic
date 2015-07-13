@@ -4,9 +4,9 @@
     .module('iffy_app')
     .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$http', '$stateParams', '$cordovaGeolocation'];
+    ApplicationController.$inject = ['$http', '$stateParams', '$cordovaGeolocation', 'ApiEndpoint'];
 
-    function ApplicationController($http, $stateParams, $cordovaGeolocation) {
+    function ApplicationController($http, $stateParams, $cordovaGeolocation, ApiEndpoint) {
 
       var self = this;
 
@@ -60,6 +60,32 @@
 
       render();
 
+      // get restaurant results from foursquare api
+      $http.get(ApiEndpoint.url)
+          .success(function(data){
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+              self.restaurants[i] = {
+                name: data[i].hash.name,
+                phone: data[i].hash.phone,
+                rating: data[i].hash.rating,
+                locationLine1: data[i].hash.location.display_address[0],
+                locationLine2: data[i].hash.location.display_address[2],
+                id: data[i].hash.id
+              };
+            }          
+          });
+
+      var postData = {
+        ll: '33.9716350,-118.4499780',
+        terms: 'coffee, fast, cheap'
+      };
+
+      // $http.post(ApiEndpoint.url + '/restaurants', postData)
+      //     .success(function(data){
+      //           console.log(data);
+      //     });
+    
     }
 
 })();
