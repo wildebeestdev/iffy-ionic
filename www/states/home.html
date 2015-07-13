@@ -3,15 +3,7 @@
 
     <h1>Hello Iffy</h1>
 
-    <ion-slide-box show-pager="false" on-slide-changed="app.createHistory($index)">
-      <ion-slide ng-repeat="restaurant in app.restaurants">
-        <div>
-          <h4><strong>{{restaurant.name}}</strong></h4>
-          <p><strong>Rating: </strong>{{restaurant.rating}}</p>
-          <p><strong>Address: </strong>{{restaurant.locationLine1}}, {{restaurant.locationLine2}}</p>
-        </div>
-      </ion-slide>
-    </ion-slide-box>
+    <div id="testCanvas"></div>
 
   </ion-content>
 </ion-view>

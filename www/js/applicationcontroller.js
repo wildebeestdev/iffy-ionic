@@ -4,45 +4,62 @@
     .module('iffy_app')
     .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$http', '$stateParams', '$ionicSlideBoxDelegate'];
+    ApplicationController.$inject = ['$http', '$stateParams', '$cordovaGeolocation'];
 
-    function ApplicationController($http, $stateParams, $ionicSlideBoxDelegate) {
+    function ApplicationController($http, $stateParams, $cordovaGeolocation) {
 
       var self = this;
 
-      self.restaurants = [];
-      self.createHistory = createHistory;
+      var testCanvas = document.getElementById("testCanvas");
 
-      // for testing sake hardcoded user ID
-      var userID = "1";
+      // Geolocation for user
+      var posOptions = {timeout: 10000, enableHighAccuracy: false};
+      $cordovaGeolocation
+        .getCurrentPosition(posOptions)
+        .then(function (position) {
+          self.lat = position.coords.latitude;
+          self.long = position.coords.longitude;
+          console.log(self.lat + " " + self.long)
+        }, function(err) {
+          console.log("error getting location")
+        });
 
-      var UserResources = new Resources('user');
+      // Test for integrating three.js
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-      $http.get('http://localhost:3000/api/v1/restaurants/')
-          .success(function(data){
-            for (var i = 0; i < data.length; i++) {
-              self.restaurants[i] = {
-                name: data[i].hash.name,
-                rating: data[i].hash.rating,
-                locationLine1: data[i].hash.location.display_address[0],
-                locationLine2: data[i].hash.location.display_address[2],
-                yelpID: data[i].hash.id
-              };
-            }
-            $ionicSlideBoxDelegate.update();
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      testCanvas.appendChild( renderer.domElement );
 
-            // make sure to send first loaded result (self.restaurants[0] to user history)
-          
-          });
+      var material = new THREE.MeshBasicMaterial({
+        color: 0x0000ff,
+        wireframe: true
+      });
 
-      function createHistory(index) {
-        var justViewed = self.restaurants[index].yelpID;
-      }
+      var radius = 1;
+      var segments = 32;
 
+      var circleGeometry = new THREE.CircleGeometry( radius, segments );        
+      var circle = new THREE.Mesh( circleGeometry, material );
 
+      scene.add( circle );
+
+      
+
+      camera.position.z = 5;
+
+      var render = function () {
+        requestAnimationFrame( render );
+
+        circle.rotation.x += 0.1;
+        circle.rotation.y += 0.1;
+
+        renderer.render(scene, camera);
+      };
+
+      render();
 
     }
-
-
 
 })();
