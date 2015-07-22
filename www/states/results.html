@@ -1,0 +1,23 @@
+<ion-view view-title="Wheel Of Meals" ng-controller="ApplicationController as app">
+  <ion-content>
+
+    <div id="testCanvas"></div>
+	<ion-list>
+      <ion-item ng-repeat="restaurant in app.singleRestaurant">
+        <div>
+          <h1><strong>{{restaurant.name}}</strong></h1>
+          <ul>
+            <li><img ng-src="{{restaurant.photo}}" /></li>
+            <li>Phone: {{restaurant.phone}}</li>
+            <li>Link: {{restaurant.url}}</li>
+            <li>Rating: {{restaurant.rating}}</li>
+            <li>Location: {{restaurant.location}}</li>
+          <ul>
+			<!-- {{restaurant}} -->
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>
+https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_150X150.png

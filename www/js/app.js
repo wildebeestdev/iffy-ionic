@@ -34,6 +34,15 @@ angular.module('iffy_app', ['ionic', 'ngCordova'])
           templateUrl: 'states/home.html'
         }
       }
+    })
+
+    .state('app.results', {
+      url: '/results',
+      views: {
+        'menuContent': {
+          templateUrl: 'states/results.html'
+        }
+      }
     });
 
 
