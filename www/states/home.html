@@ -1,15 +1,7 @@
 <ion-view view-title="Wheel Of Meals" ng-controller="ApplicationController as app">
   <ion-content>
 
-    <div id="testCanvas"></div>
-	<ion-list>
-      <ion-item ng-repeat="restaurant in app.restaurants">
-        <div>
-          <h4><strong>{{restaurant.name}}</strong></h4>
-			<!-- {{restaurant}} -->
-        </div>
-      </ion-item>
-    </ion-list>
+    <canvas id="wheel-canvas" width="500" height="500"></canvas>
 
   </ion-content>
 </ion-view>
