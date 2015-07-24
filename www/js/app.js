@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('iffy_app', ['ionic', 'ngCordova', 'iffyFilters'])
 .constant('ApiEndpoint', {
-      url: 'https://2554a913.ngrok.com'})
+      url: 'https://2554a913.ngrok.com/api/restaurants'})
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
