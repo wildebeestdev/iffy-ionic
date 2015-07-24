@@ -3,13 +3,22 @@
 
     <div id="testCanvas"></div>
 	<ion-list>
-      <ion-item ng-repeat="restaurant in app.restaurants">
+      <ion-item ng-repeat="restaurant in app.restaurants| filter:customFilter">
         <div>
           <h4><strong>{{restaurant.name}}</strong></h4>
 			<!-- {{restaurant}} -->
         </div>
+        
       </ion-item>
+      <div class="filters">
+          <ul>
+            <li ng-click="customFilter = {type: 1}">NEARBY</li>
+            <li ng-click="customFilter = {type: 2}">FAST</li>
+            <li ng-click="customFilter = {type: 3}">CHEAP</li>
+          </ul>
+        </div>
     </ion-list>
 
   </ion-content>
 </ion-view>
+

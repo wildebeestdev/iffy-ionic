@@ -10,16 +10,22 @@
 
       var self = this; 
       var testCanvas = document.getElementById("testCanvas");
-
+      var postData ={};
       // Geolocation for user
       var posOptions = {timeout: 10000, enableHighAccuracy: false};
+      
       $cordovaGeolocation
         .getCurrentPosition(posOptions)
         .then(function (position) {
         
            self.lat = position.coords.latitude;
            self.long = position.coords.longitude;
-          console.log(self.lat + " " + self.long)
+           postData = {
+        "ll": self.lat + ', ' + self.long,
+        "terms": "fast, cheap, nearby"
+      };
+        postGeolocation(postData);
+          console.log(self.lat + " " + self.long);
           // return lat;
         }, function(err) {
           console.log("error getting location")
@@ -55,18 +61,18 @@
              
         });
 
-      var postData = {
-        "ll": self.lat + ', ' + self.long,
-        "terms": "coffee, fast, cheap"
-      };
-    
-      // post data for foursquare search
-      $http.post(ApiEndpoint.url +"/restaurants", postData, {
-        headers: { 'Content-Type': 'application/json'}})
-          .success(function(data){
-          console.log("====ERROR=====")
-      })
-          .error(function(data){
-      });    
+      
+      function postGeolocation(postData) {
+        // post data for foursquare search
+        $http.post(ApiEndpoint.url +"/restaurants", postData, {
+          headers: { 'Content-Type': 'application/json'}})
+            .success(function(data){
+              console.log("====SUCCESS=====");
+              console.log(postData);
+            })
+            .error(function(data){
+              console.log("====ERROR=====");
+            }); 
+      }   
     }
 })();
