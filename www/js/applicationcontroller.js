@@ -25,17 +25,27 @@
           self.long = position.coords.longitude;
           postData = {
             "ll": self.lat + ', ' + self.long,
-            "terms": "fast, cheap, nearby"
+            "terms": "fast"
           };
           
-          postGeolocation(postData);
+          postFoursq(postData);
           console.log(self.lat + " " + self.long);
 
         }, function(err) {
           console.log("error getting location")
         });
+
+      function filterFoursq(data) {
+        alert('blah');
+        console.log(data);
+        // postData = {
+        //     "ll": self.lat + ', ' + self.long,
+        //     "terms": "fast"
+        //   };
+        //   postFoursq(postData);
+      }  
        
-      function postGeolocation(postData) {
+      function postFoursq(postData) {
         // post data for foursquare search
         $http.post(ApiEndpoint.url, postData, {
           headers: { 'Content-Type': 'application/json'}})
@@ -61,11 +71,15 @@
                     rating: data.groups[0]['items'][0].venue.rating,
                     location: data.groups[0]['items'][0].venue.location.formattedAddress.join(),
                     photo: data.groups[0]['items'][0].venue.categories[0].icon.prefix + '88' + data.groups[0]['items'][i].venue.categories[0].icon.suffix}
-              }    
+              }  
+
+              initWheel();
+              createSections(self.restaurants);  
             })
             .error(function(data){
               console.log("====ERROR=====");
             }); 
       }   
+
     }
 })();
