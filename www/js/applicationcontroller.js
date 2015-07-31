@@ -36,13 +36,12 @@
         });
 
       function filterFoursq(data) {
-        alert('blah');
-        console.log(data);
-        // postData = {
-        //     "ll": self.lat + ', ' + self.long,
-        //     "terms": "fast"
-        //   };
-        //   postFoursq(postData);
+console.log(data);
+        postData = {
+            "ll": self.lat + ', ' + self.long,
+            "terms": "fast"
+          };
+          postFoursq(postData);
       }  
        
       function postFoursq(postData) {
@@ -64,13 +63,14 @@
                 // items.first.prefix + data.groups[0]['items'][i].venue.featuredPhones.items[0].suffix
                 
                 }; 
-                self.singleRestaurant[0] = {
-                    name: data.groups[0]['items'][0].venue.name,
-                    phone: data.groups[0]['items'][0].venue.contact.formattedPhone,
-                    url: data.groups[0]['items'][0].venue.url,
-                    rating: data.groups[0]['items'][0].venue.rating,
-                    location: data.groups[0]['items'][0].venue.location.formattedAddress.join(),
-                    photo: data.groups[0]['items'][0].venue.categories[0].icon.prefix + '88' + data.groups[0]['items'][i].venue.categories[0].icon.suffix}
+                // self.singleRestaurant[0] = {
+                //     name: data.groups[0]['items'][0].venue.name,
+                //     phone: data.groups[0]['items'][0].venue.contact.formattedPhone,
+                //     url: data.groups[0]['items'][0].venue.url,
+                //     rating: data.groups[0]['items'][0].venue.rating,
+                //     location: data.groups[0]['items'][0].venue.location.formattedAddress.join(),
+                //     photo: data.groups[0]['items'][0].venue.categories[0].icon.prefix + '88' + data.groups[0]['items'][i].venue.categories[0].icon.suffix
+                // }
               }  
 
               initWheel();
