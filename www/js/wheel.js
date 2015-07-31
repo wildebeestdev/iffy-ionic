@@ -1,6 +1,6 @@
 
 var FRICTION = .95;
-var TEXT_OFFSET = 90;
+var TEXT_OFFSET = 80;
 var SELECTED_COLOR = "rgba(0,255,0,0.25)";
 
 var stage;
@@ -28,7 +28,7 @@ function initWheel(){
 	var circle = new createjs.Shape();
 
 	/* outlines */
-	circle.graphics.setStrokeStyle(1).beginStroke("#000").drawCircle(0,0,240).endStroke();
+	circle.graphics.setStrokeStyle(1).beginStroke("#000").drawCircle(0,0,200).endStroke();
 	circle.graphics.setStrokeStyle(1).beginStroke("#000").beginFill("#fff").drawCircle(0,0,50).endStroke().endFill();
 
 	wheel.addChild(circle);
@@ -40,10 +40,10 @@ function initWheel(){
 
 	// pointer
 	var pointer = new createjs.Shape();
-	pointer.graphics.beginFill("#000").lineTo(40,10).lineTo(40,-10).lineTo(0,0);
+	pointer.graphics.beginFill("#000").lineTo(-10,-20).lineTo(10,-20).lineTo(0,0);
 	stage.addChild(pointer);
-	pointer.x = 475;
-	pointer.y = 250;
+	pointer.x = 250;
+	pointer.y = 60;
 
 	// mouse events
 	wheel.addEventListener("mousedown", function(evt){
@@ -112,24 +112,24 @@ function createSections(rest_arr){
 		var section_color = i % 2 ? "#eee" : "#ddd";
 		var angle = ((Math.PI * 2) / restaurants.length) * .5;
 		bg = new createjs.Shape();
-		bg.graphics.beginFill(section_color).arc(0, 0, 240, angle * -1, angle);
+		bg.graphics.beginFill(section_color).arc(0, 0, 200, angle * -1, angle);
 		bg.graphics.lineTo(0,0);
 		sections[i].addChildAt(bg, 0);
 
 		// text
 		text = new createjs.Text(restaurants[i].name, "12px Arial", "#000");
-		text.lineWidth = 125;
+		text.lineWidth = 105;
 		text.x = TEXT_OFFSET;
 		text.y = text.getBounds().height * -.5;
 		sections[i].addChildAt(text, 1);
-		sections[i].rotation = (i * (360/restaurants.length)) + (angle * (180/Math.PI));;
+		sections[i].rotation = (i * (360/restaurants.length)) + (angle * (180/Math.PI) - 90);;
 
 		section_container.addChild(sections[i]);
 	}
 
 	// created selected shape
 	selected_shape = new createjs.Shape();
-	selected_shape.graphics.beginFill(SELECTED_COLOR).arc(0, 0, 240, angle * -1, angle);
+	selected_shape.graphics.beginFill(SELECTED_COLOR).arc(0, 0, 200, angle * -1, angle);
 	selected_shape.graphics.lineTo(0,0);
 	section_arc = (angle * 2) * (180/Math.PI);
 }

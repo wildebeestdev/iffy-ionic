@@ -47,7 +47,7 @@
             };
             postFoursq(postData);
         }
-
+        
         function postFoursq(postData) {
             // post data for foursquare search
             $http.post(ApiEndpoint.url, postData, {
