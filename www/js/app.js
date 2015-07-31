@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('iffy_app', ['ionic', 'ngCordova', 'iffyFilters'])
+angular.module('iffy_app', ['ionic', 'ngCordova'])
 .constant('ApiEndpoint', {
       url: 'https://2554a913.ngrok.com/api/restaurants'})
 .run(function($ionicPlatform) {
@@ -24,7 +24,7 @@ angular.module('iffy_app', ['ionic', 'ngCordova', 'iffyFilters'])
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'states/menu.html'
+      templateUrl: 'states/home.html'
     })
 
     .state('app.home', {
